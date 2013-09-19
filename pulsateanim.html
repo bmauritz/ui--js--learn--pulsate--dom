@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+
+    var intervalId;
+    var opacity = 0.0;
+
+    function setup() {
+
+      
+      var increment = 0.01;
+      
+
+      var increasing = true;
+      //var startTime = new Date();
+      var interval = 100; // ms
+
+
+
+
+
+      ////////////////////////////////////////
+      intervalId = setInterval(function draw() {
+        //var timePassed = new Date() - start;
+        
+        
+        
+        // Change opacity a little
+        if (increasing) {
+          opacity += increment;   // opacity = opacity + increment
+        } else {
+          opacity -= increment;   // opacity = opacity - increment
+        }
+        
+        // Check if we need to change direction
+        if (opacity >= 1.0) {
+          increasing = false;
+        } else if (opacity <= 0) {
+          increasing = true;
+        }
+
+
+        
+        // Print value
+        console.log('Opacity', opacity);
+        console.log('increasing', increasing);
+
+        rect();
+
+         
+
+      }, interval);
+      ////////////////////////////////////////
+      
+    }
+
+    // Setup 
+    setup();
+   
+
+    function stopIt() {
+      clearInterval(intervalId);
+    }
+
+    function rect() {
+        var ctx = document.getElementById('myCanvas').getContext('2d');
+
+        ctx.globalAlpha = opacity;
+        ctx.clearRect(0, 0, 500, 500);
+        ctx.fillStyle="blue";
+        ctx.fillRect (0, 0, 500, 500);
+        
+        }
+
+    
+
+  </script>
+
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid; background-color:red;">
+</canvas>
+
+<button onclick="stopIt()">Stop!</button>
+
+</body>
+</html>
